@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>멤버 정보</title>
+</head>
+<body>
+<h1>멤버 상세정보</h1>
+<div>
+    <strong>ID:</strong> <span th:text="${member.id}"></span>
+</div>
+<div>
+    <strong>이름:</strong> <span th:text="${member.name}"></span>
+</div>
+<div>
+    <strong>이메일:</strong> <span th:text="${member.email}"></span>
+</div>
+<div>
+    <h2 th:text="${member.name} + '의 보유한 상품:'">보유한 상품:</h2>
+    <ul>
+        <li th:each="item : ${member.items}" th:text="${item.name}"></li>
+    </ul>
+</div>
+<div>
+    <button type="button" th:onclick="|location.href='@{/members}'|">목록</button>
+    <button type="button" th:onclick="|location.href='@{/members/{id}/update(id=${member.id})}'|">수정</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아이템 정보</title>
+</head>
+<body>
+<h1>아이템 정보</h1>
+<div>
+    <strong>ID:</strong> <span th:text="${item.id}"></span>
+</div>
+<div>
+    <strong>이름:</strong> <span th:text="${item.name}"></span>
+</div>
+<div>
+    <strong>가격:</strong> <span th:text="${item.price}"></span>
+</div>
+<div>
+    <strong>수량:</strong> <span th:text="${item.stockQuantity}"></span>
+</div>
+<div>
+    <strong>판매자:</strong> <span th:text="${item.member != null ? item.member.name : 'N/A'}"></span>
+</div>
+<div>
+    <button type="button" th:onclick="|location.href='@{/items}'|">목록</button>
+    <button type="button" th:onclick="|location.href='@{/items/{id}/update(id=${item.id})}'|">수정</button>
+</div>
+</body>
+</html>
