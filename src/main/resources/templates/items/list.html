@@ -5,33 +5,37 @@
     <title>아이템 목록</title>
 </head>
 <body>
-<h1>아이템 목록</h1>
-<button type="button" th:onclick="|location.href='@{/home}'|">홈</button>
-<button type="button" th:onclick="|location.href='@{/items/add}'|">아이템 추가</button>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>이름</th>
-        <th>가격</th>
-        <th>수량</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item : ${items}">
-        <td th:text="${item.id}">1</td>
-        <td><a th:href="@{/items/{id}(id=${item.id})}" th:text="${item.name}">Item Name</a></td>
-        <td th:text="${item.price}">100</td>
-        <td th:text="${item.stockQuantity}">10</td>
-        <td>
-            <button type="button" th:onclick="|location.href='@{/items/{id}/update(id=${item.id})}'|">수정</button>
-            <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post" style="display:inline">
-                <button type="submit">삭제</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <script th:if="${msg}" th:inline="javascript">
+        alert([[${msg}]]);
+    </script>
+
+    <h1>아이템 목록</h1>
+    <button type="button" th:onclick="|location.href='@{/home}'|">홈</button>
+    <button type="button" th:onclick="|location.href='@{/items/add}'|">아이템 추가</button>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>가격</th>
+                <th>수량</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.id}">1</td>
+                <td><a th:href="@{/items/{id}(id=${item.id})}" th:text="${item.name}">Item Name</a></td>
+                <td th:text="${item.price}">100</td>
+                <td th:text="${item.stockQuantity}">10</td>
+                <td>
+                    <button type="button" th:onclick="|location.href='@{/items/{id}/update(id=${item.id})}'|">수정</button>
+                    <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post" style="display:inline">
+                        <button type="submit">삭제</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

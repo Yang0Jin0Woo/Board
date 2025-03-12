@@ -5,6 +5,7 @@ import item.demo.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -59,8 +60,12 @@ public class MemberController {
     }
 
     @PostMapping("/{memberId}/delete")
-    public String deleteMember(@PathVariable("memberId") Long id) {
-        memberService.deleteMember(id);
+    public String deleteMember(@PathVariable("memberId") Long id, RedirectAttributes rttr) {
+        Member memberDel = memberService.findMember(id);
+        if(memberDel != null){
+            memberService.deleteMember(id);
+            rttr.addFlashAttribute("msg", "멤버가 삭제됐습니다.");
+        }
         return "redirect:/members";
     }
 }

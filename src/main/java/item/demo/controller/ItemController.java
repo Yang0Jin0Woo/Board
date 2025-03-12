@@ -7,6 +7,7 @@ import item.demo.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -76,8 +77,12 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/delete")
-    public String deleteItem(@PathVariable("itemId") Long id){
-        itemService.deleteItem(id);
+    public String deleteItem(@PathVariable("itemId") Long id, RedirectAttributes rttr){
+        Item itemDel = itemService.findItem(id);
+        if(itemDel != null) {
+            itemService.deleteItem(id);
+            rttr.addFlashAttribute("msg", "게시물이 삭제됐습니다.");
+        }
         return "redirect:/items";
     }
 }
